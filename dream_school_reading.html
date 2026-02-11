@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>꿈의 학교 부모학교 - 독서 & 동영상 프로그램</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7f6f3;
+            --bg-hover: #f1f0ed;
+            --text-primary: #37352f;
+            --text-secondary: #787774;
+            --border-color: #e9e9e7;
+            --accent-blue: #0b6adf;
+            --accent-green: #0f7b6c;
+            --accent-orange: #d9730d;
+            --accent-purple: #9065b0;
+            --accent-red: #e03e3e;
+            --shadow: rgba(15, 15, 15, 0.1);
+        }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--bg-primary);
+            border-radius: 3px;
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+
+        .header {
+            padding: 60px 80px 40px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-icon {
+            font-size: 78px;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .content {
+            padding: 40px 80px 80px;
+        }
+
+        .callout {
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--accent-blue);
+            padding: 16px 20px;
+            margin-bottom: 32px;
+            border-radius: 3px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .callout-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .callout-content {
+            flex: 1;
+        }
+
+        .callout strong {
+            font-weight: 600;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin: 48px 0 24px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h2:first-child {
+            margin-top: 0;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 32px 0 16px;
+            color: var(--text-primary);
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: var(--bg-hover);
+            color: var(--text-primary);
+            padding: 4px 10px;
+            border-radius: 3px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-right: 8px;
+        }
+
+        .section-tag.required {
+            background: #fdecea;
+            color: var(--accent-red);
+        }
+
+        .section-tag.recommended {
+            background: #edf3fa;
+            color: var(--accent-blue);
+        }
+
+        .section-tag.video {
+            background: #f3eefc;
+            color: var(--accent-purple);
+        }
+
+        .book-grid {
+            display: grid;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .book-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 16px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .book-item:hover {
+            background: var(--bg-hover);
+            transform: translateX(2px);
+        }
+
+        .book-icon {
+            font-size: 20px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .book-info {
+            flex: 1;
+        }
+
+        .book-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+
+        .book-meta {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .category-header {
+            background: var(--bg-secondary);
+            padding: 12px 16px;
+            border-radius: 3px;
+            margin: 24px 0 12px;
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text-primary);
+        }
+
+        .video-grid {
+            display: grid;
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .video-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .video-item:hover {
+            background: var(--bg-hover);
+            border-color: var(--accent-purple);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .video-icon {
+            font-size: 28px;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        .video-info {
+            flex: 1;
+        }
+
+        .video-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+            font-size: 15px;
+        }
+
+        .video-link {
+            font-size: 12px;
+            color: var(--accent-blue);
+            word-break: break-all;
+        }
+
+        .credit-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .credit-info {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 20px 24px;
+            border-radius: 3px;
+            color: white;
+            margin: 32px 0;
+            font-weight: 500;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 40px 0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 3px;
+            text-align: center;
+        }
+
+        .stat-card.green {
+            background: linear-gradient(135deg, #0f7b6c 0%, #0ba360 100%);
+        }
+
+        .stat-card.orange {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .header, .content {
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-icon">📚</div>
+            <h1>꿈의 학교 부모학교</h1>
+            <p class="subtitle">독서 & 동영상 프로그램 (감상문 제출)</p>
+        </div>
+
+        <div class="content">
+            <div class="callout">
+                <div class="callout-icon">💡</div>
+                <div class="callout-content">
+                    <strong>학점 제도 안내</strong><br>
+                    필독서는 권당 2학점, 권장도서는 권당 1학점, 동영상은 회당 0.5학점이 부여됩니다. (필독서는 1년 4학점, 권장도서 및 동영상은 각각 1년 3학점까지 인정)
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">9</div>
+                    <div class="stat-label">필독서 (2학점)</div>
+                </div>
+                <div class="stat-card green">
+                    <div class="stat-number">60+</div>
+                    <div class="stat-label">권장도서 (1학점)</div>
+                </div>
+                <div class="stat-card orange">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">동영상 (0.5학점)</div>
+                </div>
+            </div>
+
+            <!-- 필독서 섹션 -->
+            <h2>📕 필독서 <span class="section-tag required">권당 2학점</span></h2>
+            
+            <div class="book-grid">
+                <div class="book-item">
+                    <div class="book-icon">📖</div>
+                    <div class="book-info">
+                        <div class="book-title">위험한 부르심? 위대한 부르심!</div>
+                        <div class="book-meta">꿈의학교 / 예영</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📖</div>
+                    <div class="book-info">
+                        <div class="book-title">기억하지 못하면 거역하게 됩니다</div>
+                        <div class="book-meta">꿈의학교 / 예영</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📖</div>
+                    <div class="book-info">
+                        <div class="book-title">공부머리 독서법</div>
+                        <div class="book-meta">최승필 / 책구루</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📖</div>
+                    <div class="book-info">
+                        <div class="book-title">내 삶을 변화시키는 감사의 기적</div>
+                        <div class="book-meta">황성주 / 정민미디어</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📖</div>
+                    <div class="book-info">
+                        <div class="book-title">부모면허</div>
+                        <div class="book-meta">박인경 / 규장</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📖</div>
+                    <div class="book-info">
+                        <div class="book-title">부모영성학교: 자녀양육의 영적 역동성을 회복하라</div>
+                        <div class="book-meta">게리 토마스 / CUP</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📖</div>
+                    <div class="book-info">
+                        <div class="book-title">Why Jesus</div>
+                        <div class="book-meta">조정민 / 두란노</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📖</div>
+                    <div class="book-info">
+                        <div class="book-title">네 신을 벗으라</div>
+                        <div class="book-meta">로렌 커닝햄 / 예수전도단</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📖</div>
+                    <div class="book-info">
+                        <div class="book-title">세계관 전쟁</div>
+                        <div class="book-meta">이태희 / 두란노</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 권장도서 섹션 -->
+            <h2>📘 권장도서 <span class="section-tag recommended">권당 1학점</span></h2>
+
+            <div class="category-header">1️⃣ 기독교 교육 철학</div>
+            <div class="book-grid">
+                <div class="book-item">
+                    <div class="book-icon">📗</div>
+                    <div class="book-info">
+                        <div class="book-title">가르침과 배움의 영성</div>
+                        <div class="book-meta">파커 팔머 / IVP</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📗</div>
+                    <div class="book-info">
+                        <div class="book-title">구원이란 무엇인가</div>
+                        <div class="book-meta">김세윤 / 두란노</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📗</div>
+                    <div class="book-info">
+                        <div class="book-title">기독교 세계관</div>
+                        <div class="book-meta">카도쉬아카데미 김민호 / 리바이벌북스</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📗</div>
+                    <div class="book-info">
+                        <div class="book-title">세계관 전쟁</div>
+                        <div class="book-meta">이태희 / 두란노</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📗</div>
+                    <div class="book-info">
+                        <div class="book-title">기독교 세계관과 현대사상</div>
+                        <div class="book-meta">제임스 사이어 / IVP / eBook</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📗</div>
+                    <div class="book-info">
+                        <div class="book-title">기독교의 기본 진리</div>
+                        <div class="book-meta">존 스토트 / 생명의 말씀사 / eBook</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📗</div>
+                    <div class="book-info">
+                        <div class="book-title">복음이란 무엇인가</div>
+                        <div class="book-meta">김세윤 / 두란노</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📗</div>
+                    <div class="book-info">
+                        <div class="book-title">완전한 진리</div>
+                        <div class="book-meta">낸시 피어시 / 복있는 사람</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📗</div>
+                    <div class="book-info">
+                        <div class="book-title">입시에 대한 기독교적 이해</div>
+                        <div class="book-meta">기독교교육연구소 / 예영</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📗</div>
+                    <div class="book-info">
+                        <div class="book-title">순전한 기독교</div>
+                        <div class="book-meta">C.S. 루이스 / 홍성사</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📗</div>
+                    <div class="book-info">
+                        <div class="book-title">놀라운 하나님의 은혜</div>
+                        <div class="book-meta">필립 안시 / IVP</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📗</div>
+                    <div class="book-info">
+                        <div class="book-title">인문학을 하나님께</div>
+                        <div class="book-meta">한재욱 / 규장</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📗</div>
+                    <div class="book-info">
+                        <div class="book-title">사람은 무엇으로 사는가</div>
+                        <div class="book-meta">톨스토이 / 문예출판사</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📗</div>
+                    <div class="book-info">
+                        <div class="book-title">자유로부터의 도피</div>
+                        <div class="book-meta">에리히 프롬 / 휴머니스트</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-header">2️⃣ 자녀교육</div>
+            <div class="book-grid">
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">불안세대</div>
+                        <div class="book-meta">조너선 하이트 / 웅진지식하우스</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">거북한 십대 거룩한 십대</div>
+                        <div class="book-meta">유진 피터슨 / 홍성사</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">기쁨으로 크는 자녀 1, 2, 3</div>
+                        <div class="book-meta">마이클 펄 / DCTY</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">아이들을 위한 라브리 가정 교육</div>
+                        <div class="book-meta">수잔 쉐퍼 맥콜리 / 그리심</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">아이의 자신감을 높여주는 맞춤 학습법</div>
+                        <div class="book-meta">매를린 D. 레피버 / DCTY</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">크리스천 부모학교</div>
+                        <div class="book-meta">유영업 / 생명의 말씀사</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">가정이 최고의 학교다</div>
+                        <div class="book-meta">마이클 펄 / 예영커뮤니케이션</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">부모 학교</div>
+                        <div class="book-meta">게리 토마스 / CUP</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">부모 효과</div>
+                        <div class="book-meta">박재원 / 다산 에듀 / eBook</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">세상이 학교다, 여행이 공부다</div>
+                        <div class="book-meta">박임순 / 북노마드</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">청소년 감정 코칭</div>
+                        <div class="book-meta">최성애, 조벽 / 해냄출판사</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">존 비비어의 결혼</div>
+                        <div class="book-meta">존 비비어 / 두란노</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">공부머리 독서법</div>
+                        <div class="book-meta">최승필 / 책구루</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">너는 내 것이라</div>
+                        <div class="book-meta">김지연 / 두란노</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">하나님의 뜻</div>
+                        <div class="book-meta">제럴드 싯처 / 성서유니온</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">고린도전서 13장 상 사랑</div>
+                        <div class="book-meta">김남준 / 생명의말씀사</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">(만화로 보는) 차마 신이 없다고 말하기 전에</div>
+                        <div class="book-meta">박영덕 / 생명의 말씀사</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">(만화로 보는) 기독교</div>
+                        <div class="book-meta">라원기 원작 / 생명의 말씀사</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">👨‍👩‍👧‍👦</div>
+                    <div class="book-info">
+                        <div class="book-title">과학자의 눈으로 본 창세기</div>
+                        <div class="book-meta">김준 / 두란노</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-header">3️⃣ 성품교육</div>
+            <div class="book-grid">
+                <div class="book-item">
+                    <div class="book-icon">💎</div>
+                    <div class="book-info">
+                        <div class="book-title">존 비비어의 관계</div>
+                        <div class="book-meta">존 비비어 / 터치북스</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💎</div>
+                    <div class="book-info">
+                        <div class="book-title">존 비비어의 순종</div>
+                        <div class="book-meta">존 비비어 / 두란노</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💎</div>
+                    <div class="book-info">
+                        <div class="book-title">존 비비어 존중</div>
+                        <div class="book-meta">존 비비어 / 두란노</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💎</div>
+                    <div class="book-info">
+                        <div class="book-title">절대감사</div>
+                        <div class="book-meta">황성주 / 규장</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💎</div>
+                    <div class="book-info">
+                        <div class="book-title">인간의 품격</div>
+                        <div class="book-meta">데이비드 브룩스 / 부키</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-header">4️⃣ 초청토론</div>
+            <div class="book-grid">
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">그리스도인은 인간을 어떻게 이해할 것인가</div>
+                        <div class="book-meta">김진 / 생명의 말씀사</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">성경 속에 나타난 하나님의 학습법</div>
+                        <div class="book-meta">박상진 / 두란노</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">소명</div>
+                        <div class="book-meta">오스 기니스 / IVP</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">현대 사회 문제와 그리스도인의 책임</div>
+                        <div class="book-meta">존 스토트 / IVP</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">파인애플 스토리</div>
+                        <div class="book-meta">IBLP / 아이비엘피코리아</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">담</div>
+                        <div class="book-meta">글로리아 제이 에번스 / 비아토르</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">에니어그램으로 보는 우리 아이 속마음</div>
+                        <div class="book-meta">엘리자베스 와젤리 / 연경문화사</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">고맙다</div>
+                        <div class="book-meta">서정인 / 규장</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">김대중 이희호 부부의 옥중서신</div>
+                        <div class="book-meta">김대중 / 시대의창</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">나와 하나님</div>
+                        <div class="book-meta">대천덕 / 홍성사</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">내 눈에는 희망만 보였다</div>
+                        <div class="book-meta">강영우 / 두란노</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">내 잔이 넘치나이다</div>
+                        <div class="book-meta">정연희 / 홍성사</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">네 약함을 자랑하라</div>
+                        <div class="book-meta">이효진 / 규장</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">네 약함이 축복이라</div>
+                        <div class="book-meta">이효진 / 규장</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">눈물은 힘이 세다</div>
+                        <div class="book-meta">이철환 / 해냄출판사</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">대천덕 자서전 개척자의 길</div>
+                        <div class="book-meta">대천덕 / 홍성사</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">만나지 않으면 변하지 않는다</div>
+                        <div class="book-meta">김형국 / 생명의 말씀사</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">생각이 내가 된다</div>
+                        <div class="book-meta">이영표 / 두란노</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">아니야, 우리가 미안하다</div>
+                        <div class="book-meta">천종호 / 우리학교</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">양화진</div>
+                        <div class="book-meta">정연희 / 규장</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">예수원이야기: 광야에 마련된 식탁</div>
+                        <div class="book-meta">현재인 / 홍성사</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">우리와 하나님</div>
+                        <div class="book-meta">대천덕 / 홍성사</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">위로</div>
+                        <div class="book-meta">이철환 / 자음과 모음</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">유대인의 인성교육노하우 1~4권</div>
+                        <div class="book-meta">현용수 / 쉐마</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">이 아이들에게도 아버지가 필요합니다</div>
+                        <div class="book-meta">천종호 / 우리학교</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">잊지 않았다</div>
+                        <div class="book-meta">케네스 배 / 두란노</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">청년아 때가 찼다</div>
+                        <div class="book-meta">김형국 / 죠이선교회</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">토지와 경제 정의</div>
+                        <div class="book-meta">대천덕 / 홍성사 / eBook</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">할렐루야 변호사</div>
+                        <div class="book-meta">주명수 / 홍성사</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">💬</div>
+                    <div class="book-info">
+                        <div class="book-title">왜 예수인가(WHY JESUS?)</div>
+                        <div class="book-meta">조정민 / 두란노</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-header">5️⃣ 기타</div>
+            <div class="book-grid">
+                <div class="book-item">
+                    <div class="book-icon">📚</div>
+                    <div class="book-info">
+                        <div class="book-title">가치로의 산책</div>
+                        <div class="book-meta">이인희 / 예영</div>
+                    </div>
+                </div>
+                <div class="book-item">
+                    <div class="book-icon">📚</div>
+                    <div class="book-info">
+                        <div class="book-title">갈대상자</div>
+                        <div class="book-meta">김영애 / 두란노 - 한동대 건립 역사 간증</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- 동영상 섹션 -->
+            <h2>🎬 교육관련 동영상 <span class="section-tag video">회당 0.5학점 (1년 3학점까지)</span></h2>
+
+            <div class="video-grid">
+                <a href="https://ichannela.com/program/detail/program_detail_renew.do?cateCode=0500700001" target="_blank" class="video-item">
+                    <div class="video-icon">📺</div>
+                    <div class="video-info">
+                        <div class="video-title">CHANNEL A 오은영 박사의 금쪽같은 내새끼</div>
+                        <div class="video-link">ichannela.com</div>
+                    </div>
+                </a>
+
+                <a href="https://docuprime.ebs.co.kr/docuprime/newReplayList?courseId=BP0PAPB0000000005&stepId=60055927" target="_blank" class="video-item">
+                    <div class="video-icon">🎥</div>
+                    <div class="video-info">
+                        <div class="video-title">EBS 교육대기획. 왜 우리는 대학에 가는가 6부작</div>
+                        <div class="video-link">docuprime.ebs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://docuprime.ebs.co.kr/docuprime/newReplayList?courseId=BP0PAPB0000000005&stepId=60056113" target="_blank" class="video-item">
+                    <div class="video-icon">🎥</div>
+                    <div class="video-info">
+                        <div class="video-title">EBS 교육대기획. 학교의 고백 10부작</div>
+                        <div class="video-link">docuprime.ebs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://docuprime.ebs.co.kr/docuprime/newReplayList?courseId=BP0PAPB0000000005&stepId=60055852" target="_blank" class="video-item">
+                    <div class="video-icon">🎥</div>
+                    <div class="video-info">
+                        <div class="video-title">EBS 다큐프라임. 4차 산업혁명시대 교육대혁명 3부작</div>
+                        <div class="video-link">docuprime.ebs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://docuprime.ebs.co.kr/docuprime/newReplayList?courseId=BP0PAPB0000000005&stepId=60055887" target="_blank" class="video-item">
+                    <div class="video-icon">🎥</div>
+                    <div class="video-info">
+                        <div class="video-title">EBS 다큐프라임. 가족쇼크 9부작</div>
+                        <div class="video-link">docuprime.ebs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://docuprime.ebs.co.kr/docuprime/newReplayList?courseId=BP0PAPB0000000005&stepId=60055896" target="_blank" class="video-item">
+                    <div class="video-icon">🎥</div>
+                    <div class="video-info">
+                        <div class="video-title">EBS 다큐프라임. 공부 못하는 아이 5부작</div>
+                        <div class="video-link">docuprime.ebs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://docuprime.ebs.co.kr/docuprime/newReplayList?courseId=BP0PAPB0000000005&stepId=60055923" target="_blank" class="video-item">
+                    <div class="video-icon">🎥</div>
+                    <div class="video-info">
+                        <div class="video-title">EBS 다큐프라임. 교육혁명 15세에 주목하라 5부작</div>
+                        <div class="video-link">docuprime.ebs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://docuprime.ebs.co.kr/docuprime/newReplayList?courseId=BP0PAPB0000000005&stepId=60055997" target="_blank" class="video-item">
+                    <div class="video-icon">🎥</div>
+                    <div class="video-info">
+                        <div class="video-title">EBS 다큐프라임. 마더 쇼크 3부작</div>
+                        <div class="video-link">docuprime.ebs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://docuprime.ebs.co.kr/docuprime/newReplayList?courseId=BP0PAPB0000000005&stepId=60055911" target="_blank" class="video-item">
+                    <div class="video-icon">🎥</div>
+                    <div class="video-info">
+                        <div class="video-title">EBS 다큐프라임. 미래를 바꾸는 교육 3부작</div>
+                        <div class="video-link">docuprime.ebs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://docuprime.ebs.co.kr/docuprime/newReplayList?courseId=BP0PAPB0000000005&stepId=60055965" target="_blank" class="video-item">
+                    <div class="video-icon">🎥</div>
+                    <div class="video-info">
+                        <div class="video-title">EBS 다큐프라임. 사교육제로프로젝트 꼴찌, 날개를 달다 3부작</div>
+                        <div class="video-link">docuprime.ebs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://docuprime.ebs.co.kr/docuprime/newReplayList?courseId=BP0PAPB0000000005&stepId=60055904" target="_blank" class="video-item">
+                    <div class="video-icon">🎥</div>
+                    <div class="video-info">
+                        <div class="video-title">EBS 다큐프라임. 슬로리딩 3부작</div>
+                        <div class="video-link">docuprime.ebs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://docuprime.ebs.co.kr/docuprime/newReplayList?courseId=BP0PAPB0000000005&stepId=60055918" target="_blank" class="video-item">
+                    <div class="video-icon">🎥</div>
+                    <div class="video-info">
+                        <div class="video-title">EBS 다큐프라임. 아버지의 성(父性) 3부작</div>
+                        <div class="video-link">docuprime.ebs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://docuprime.ebs.co.kr/docuprime/newReplayList?courseId=BP0PAPB0000000005&stepId=60056014" target="_blank" class="video-item">
+                    <div class="video-icon">🎥</div>
+                    <div class="video-info">
+                        <div class="video-title">EBS 다큐프라임. 아이의 사생활</div>
+                        <div class="video-link">docuprime.ebs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://docuprime.ebs.co.kr/docuprime/newReplayList?courseId=BP0PAPB0000000005&stepId=60055967" target="_blank" class="video-item">
+                    <div class="video-icon">🎥</div>
+                    <div class="video-info">
+                        <div class="video-title">EBS 다큐프라임. 언어폭력개선프로젝트 2부작</div>
+                        <div class="video-link">docuprime.ebs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://docuprime.ebs.co.kr/docuprime/newReplayList?courseId=BP0PAPB0000000005&stepId=60055939" target="_blank" class="video-item">
+                    <div class="video-icon">🎥</div>
+                    <div class="video-info">
+                        <div class="video-title">EBS 다큐프라임. 초등성장보고서 5부작</div>
+                        <div class="video-link">docuprime.ebs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://docuprime.ebs.co.kr/docuprime/newReplayList?courseId=BP0PAPB0000000005&stepId=60055958" target="_blank" class="video-item">
+                    <div class="video-icon">🎥</div>
+                    <div class="video-info">
+                        <div class="video-title">EBS 다큐프라임. 파더 쇼크 3부작</div>
+                        <div class="video-link">docuprime.ebs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://docuprime.ebs.co.kr/docuprime/newReplayList?courseId=BP0PAPB0000000005&stepId=60055928" target="_blank" class="video-item">
+                    <div class="video-icon">🎥</div>
+                    <div class="video-info">
+                        <div class="video-title">EBS 다큐프라임. 학교의 발견 3부작</div>
+                        <div class="video-link">docuprime.ebs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://docuprime.ebs.co.kr/docuprime/newReplayList?courseId=BP0PAPB0000000005&stepId=60055937" target="_blank" class="video-item">
+                    <div class="video-icon">🎥</div>
+                    <div class="video-info">
+                        <div class="video-title">EBS 다큐프라임. 한국인과 영어 5부작</div>
+                        <div class="video-link">docuprime.ebs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://program.kbs.co.kr/1tv/culture/unitykorea/pc/index.html" target="_blank" class="video-item">
+                    <div class="video-icon">📺</div>
+                    <div class="video-info">
+                        <div class="video-title">KBS 특별기획. 통일한국을 그리다 3부작</div>
+                        <div class="video-link">program.kbs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://m.imbc.com/Vod/VodPlay?progCode=1000850100000100000&broadcastID=1000850100277100000&type=VOD" target="_blank" class="video-item">
+                    <div class="video-icon">📺</div>
+                    <div class="video-info">
+                        <div class="video-title">MBC 다큐프라임 273회. 제때 배우는 기쁨을 누려라</div>
+                        <div class="video-link">m.imbc.com</div>
+                    </div>
+                </a>
+
+                <a href="https://m.imbc.com/Vod/VodPlay?progCode=1000850100000100000&broadcastID=1000850100278100000&type=VOD" target="_blank" class="video-item">
+                    <div class="video-icon">📺</div>
+                    <div class="video-info">
+                        <div class="video-title">MBC 다큐프라임 274회. 교실 변화의 시작, 나의 꿈을 여는 두드림!</div>
+                        <div class="video-link">m.imbc.com</div>
+                    </div>
+                </a>
+
+                <a href="https://programs.sbs.co.kr/culture/specialpro/vod/82679/20000000036" target="_blank" class="video-item">
+                    <div class="video-icon">📺</div>
+                    <div class="video-info">
+                        <div class="video-title">SBS 스페셜. 부모vs부모학교 3부작</div>
+                        <div class="video-link">programs.sbs.co.kr</div>
+                    </div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=So5mq1TugBQ" target="_blank" class="video-item">
+                    <div class="video-icon">▶️</div>
+                    <div class="video-info">
+                        <div class="video-title">꿈의학교 초청토론. 김해영 선교사 편 - 1부</div>
+                        <div class="video-link">youtube.com</div>
+                    </div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=w65I7z91pCA" target="_blank" class="video-item">
+                    <div class="video-icon">▶️</div>
+                    <div class="video-info">
+                        <div class="video-title">꿈의학교 초청토론. 김해영 선교사 편 - 2부</div>
+                        <div class="video-link">youtube.com</div>
+                    </div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=KezES30NGbc" target="_blank" class="video-item">
+                    <div class="video-icon">▶️</div>
+                    <div class="video-info">
+                        <div class="video-title">꿈의학교 초청토론. 김해영 선교사 편 - 3부</div>
+                        <div class="video-link">youtube.com</div>
+                    </div>
+                </a>
+
+                <a href="https://www.youtube.com/playlist?list=PLKUnm8-NsD9xWpb82EB0CEFI5g9LG15bJ" target="_blank" class="video-item">
+                    <div class="video-icon">▶️</div>
+                    <div class="video-info">
+                        <div class="video-title">미래강연. 4차 산업혁명시대 교육 4부작</div>
+                        <div class="video-link">youtube.com</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
